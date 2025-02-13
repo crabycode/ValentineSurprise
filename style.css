@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');      
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    transition: background 1.5s ease-in-out;
+    position: fixed;
+    text-align: center;
+    overflow: hidden;
+    touch-action: none;
+}
+.gradient-bg {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3, #ffa7e0);
+}
+button {
+    font-family: 'Pacifico', cursive;
+    font-size: 24px;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 50px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    z-index: 3;
+    position: relative;
+}    
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+}    
+.hidden {
+    display: none;
+}   
+.valentine {
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}       
+.valentine h1 {
+    text-shadow: 2px 2px 4px black;
+    font-family: 'Pacifico', cursive;
+    font-size: 36px;
+    color: white;
+}
+.valentine p {
+    text-shadow: 2px 2px 4px black;
+    font-family: 'Pacifico', cursive;
+    font-size: 24px;
+    color: white;
+}
+.valentine img {
+    width: 70%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 3;
+}
+.heart {
+    position: absolute;
+    top: -10vh;
+    font-size: 24px;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    0% { transform: translateY(0) translateX(0); opacity: 1; }
+    100% { transform: translateY(110vh) translateX(30px); opacity: 0; }
+}
+.slider {
+    display: flex;
+    overflow: hidden;
+    width: 100vw;
+    height: 150px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.3;
+    z-index: 1;
+    visibility: hidden;
+}        
+.slide-track {
+    display: flex;
+    width: 200%;
+    animation: slide 10s linear infinite;
+}        
+.slide-track img {
+    width: 120px;
+    height: 120px;
+    margin: 0 5px;
+    border-radius: 10px;
+}
+@keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
