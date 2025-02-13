@@ -28,6 +28,7 @@
             touch-action: none;
         }
 
+        /* Градиентен фон, който ще се активира след натискане на бутона */
         .gradient-bg {
             background: linear-gradient(135deg, #ff758c, #ff7eb3, #ffa7e0);
         }
@@ -124,26 +125,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* ❤️ Анимация на сърцата */
-        .heart {
-            position: absolute;
-            font-size: 24px;
-            color: red;
-            opacity: 0.8;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-10vh) translateX(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(110vh) translateX(calc(-50px + 100px * random()));
-                opacity: 0;
-            }
-        }
-
         @media (max-width: 768px) {
             button {
                 font-size: 20px;
@@ -200,27 +181,7 @@
                 img.src = src;
                 track.appendChild(img);
             });
-            startHearts();
         });
-
-        function startHearts() {
-            setInterval(() => {
-                let heart = document.createElement("div");
-                heart.classList.add("heart");
-                heart.innerHTML = "❤️";
-                
-                // Случайна позиция по ширината
-                heart.style.left = Math.random() * window.innerWidth + "px";
-                heart.style.animationDuration = (3 + Math.random() * 2) + "s"; // Различни скорости
-
-                document.body.appendChild(heart);
-
-                // Изчистване на сърцата след падане
-                setTimeout(() => {
-                    heart.remove();
-                }, 5000);
-            }, 300);
-        }
     </script>
 </body>
 </html>
