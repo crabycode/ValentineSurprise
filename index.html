@@ -21,14 +21,13 @@
             height: 100vh;
             width: 100vw;
             flex-direction: column;
-            transition: background 1.5s ease-in-out; /* Плавен преход */
+            transition: background 1.5s ease-in-out;
             position: fixed;
             text-align: center;
             overflow: hidden;
             touch-action: none;
         }
 
-        /* Градиентен фон, който ще се активира след натискане на бутона */
         .gradient-bg {
             background: linear-gradient(135deg, #ff758c, #ff7eb3, #ffa7e0);
         }
@@ -59,7 +58,7 @@
         .valentine {
             text-align: center;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out; /* Плавно изчезване и поява */
+            transition: opacity 1.5s ease-in-out;
             position: relative;
             z-index: 2;
             display: flex;
@@ -73,7 +72,6 @@
             font-family: 'Pacifico', cursive;
             font-size: 36px;
             color: white;
-            margin-bottom: 15px;
         }
 
         .valentine p {
@@ -81,7 +79,6 @@
             font-family: 'Pacifico', cursive;
             font-size: 24px;
             color: white;
-            margin-top: 15px;
         }
 
         .valentine img {
@@ -93,7 +90,21 @@
             position: relative;
             z-index: 3;
         }
-        
+
+        /* Анимация на падащи сърца */
+        .heart {
+            position: absolute;
+            top: -10vh;
+            font-size: 24px;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            100% { transform: translateY(110vh) translateX(30px); opacity: 0; }
+        }
+
         .slider {
             display: flex;
             overflow: hidden;
@@ -124,27 +135,6 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-
-        @media (max-width: 768px) {
-            button {
-                font-size: 20px;
-                padding: 15px 30px;
-            }
-            
-            .valentine h1 {
-                font-size: 28px;
-            }
-            
-            .slider {
-                height: 130px;
-                top: 55%;
-            }
-            
-            .slide-track img {
-                width: 90px;
-                height: 90px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -162,7 +152,7 @@
     
     <script>
         document.getElementById("startButton").addEventListener("click", function() {
-            document.body.classList.add("gradient-bg"); // Променя фона към градиент
+            document.body.classList.add("gradient-bg");
             this.style.display = "none";
             
             let valentineDiv = document.getElementById("valentine");
@@ -173,6 +163,24 @@
             slider.classList.remove("hidden");
             slider.style.visibility = "visible";
             
+            startHearts();
+            startSlider();
+        });
+        
+        function startHearts() {
+            setInterval(() => {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.fontSize = `${Math.random() * 20 + 15}px`;
+                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+        }
+
+        function startSlider() {
             let images = ["img1.png", "img2.png", "img3.png", "img4.png", "img5.png", "img6.png", "img7.png", "img8.png", "img9.png", "img10.png"];
             let track = document.getElementById("slideTrack");
             
@@ -181,7 +189,7 @@
                 img.src = src;
                 track.appendChild(img);
             });
-        });
+        }
     </script>
 </body>
 </html>
