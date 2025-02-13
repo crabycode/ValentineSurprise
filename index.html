@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изненада</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            transition: background-color 1s ease;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+        
+        button {
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            z-index: 3;
+            position: relative;
+        }
+        
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .valentine {
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .valentine h1 {
+            text-shadow: 2px 2px 4px black;
+            font-family: 'Pacifico', cursive;
+            font-size: 36px;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .valentine img {
+            width: 90%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .slider {
+            display: flex;
+            overflow: hidden;
+            width: 100vw;
+            height: 200px;
+            position: absolute;
+            top: 60%;
+            transform: translateY(-50%);
+            opacity: 0.3;
+            z-index: 1;
+            visibility: hidden;
+        }
+        
+        .slide-track {
+            display: flex;
+            width: 200%;
+            animation: slide 10s linear infinite;
+        }
+        
+        .slide-track img {
+            width: 150px;
+            height: 150px;
+            margin: 0 5px;
+            border-radius: 10px;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            clip-path: path('M24 3C21-3 12 0 12 7 12 0 3-3 0 3-3 9 12 21 12 21 12 21 27 9 24 3Z');
+            animation: hearts 5s linear infinite;
+        }
+        
+        @keyframes hearts {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            button {
+                font-size: 20px;
+                padding: 15px 30px;
+            }
+            
+            .valentine h1 {
+                font-size: 28px;
+            }
+            
+            .slider {
+                height: 150px;
+                top: 65%;
+            }
+            
+            .slide-track img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="startButton">Натисни ме</button>
+    
+    <div class="slider hidden" id="slider">
+        <div class="slide-track" id="slideTrack"></div>
+    </div>
+    
+    <div class="valentine hidden" id="valentine">
+        <h1>Честит Свети Валентин, бебе ❤️</h1>
+        <img src="us.jpg" alt="Нашата снимка">
+    </div>
+    
+    <script>
+        document.getElementById("startButton").addEventListener("click", function() {
+            document.body.style.backgroundColor = "pink";
+            this.style.display = "none";
+            
+            let valentineDiv = document.getElementById("valentine");
+            valentineDiv.classList.remove("hidden");
+            setTimeout(() => valentineDiv.style.opacity = 1, 100);
+            
+            let slider = document.getElementById("slider");
+            slider.classList.remove("hidden");
+            slider.style.visibility = "visible";
+            
+            let images = ["img1.png", "img2.png", "img3.png", "img4.png", "img5.png", "img6.png", "img7.png", "img8.png", "img9.png", "img10.png"];
+            let track = document.getElementById("slideTrack");
+            
+            images.forEach(src => {
+                let img = document.createElement("img");
+                img.src = src;
+                track.appendChild(img);
+            });
+            
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                document.body.appendChild(heart);
+            }
+        });
+    </script>
+</body>
+</html>
